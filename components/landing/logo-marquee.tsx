@@ -1,18 +1,37 @@
 "use client"
 
+import Cursor from "@lobehub/icons/es/Cursor"
+import Anthropic from "@lobehub/icons/es/Anthropic"
+import Ollama from "@lobehub/icons/es/Ollama"
+import OpenAI from "@lobehub/icons/es/OpenAI"
+import ElevenLabs from "@lobehub/icons/es/ElevenLabs"
+import LangChain from "@lobehub/icons/es/LangChain"
+import Replicate from "@lobehub/icons/es/Replicate"
+import Stability from "@lobehub/icons/es/Stability"
+import Vercel from "@lobehub/icons/es/Vercel"
+import Midjourney from "@lobehub/icons/es/Midjourney"
+import ComfyUI from "@lobehub/icons/es/ComfyUI"
+import Suno from "@lobehub/icons/es/Suno"
+import Pika from "@lobehub/icons/es/Pika"
+import LmStudio from "@lobehub/icons/es/LmStudio"
+import Claude from "@lobehub/icons/es/Claude"
+
 const tools = [
-  { name: "Cursor", icon: "cursor" },
-  { name: "Anthropic", icon: "anthropic" },
-  { name: "Ollama", icon: "ollama" },
-  { name: "Codeium", icon: "codeium" },
-  { name: "ElevenLabs", icon: "elevenlabs" },
-  { name: "LangChain", icon: "langchain" },
-  { name: "Replicate", icon: "replicate" },
-  { name: "OpenAI", icon: "openai" },
-  { name: "Stability AI", icon: "stability" },
-  { name: "Vercel", icon: "vercel" },
-  { name: "Midjourney", icon: "midjourney" },
-  { name: "ComfyUI", icon: "comfyui" },
+  { name: "Cursor", Icon: Cursor },
+  { name: "Anthropic", Icon: Anthropic },
+  { name: "Claude", Icon: Claude },
+  { name: "Ollama", Icon: Ollama },
+  { name: "OpenAI", Icon: OpenAI },
+  { name: "ElevenLabs", Icon: ElevenLabs },
+  { name: "LangChain", Icon: LangChain },
+  { name: "Replicate", Icon: Replicate },
+  { name: "Stability AI", Icon: Stability },
+  { name: "Vercel", Icon: Vercel },
+  { name: "Midjourney", Icon: Midjourney },
+  { name: "ComfyUI", Icon: ComfyUI },
+  { name: "Suno", Icon: Suno },
+  { name: "Pika", Icon: Pika },
+  { name: "LM Studio", Icon: LmStudio },
 ]
 
 export function LogoMarquee() {
@@ -25,20 +44,10 @@ export function LogoMarquee() {
         <div className="flex w-max animate-marquee gap-8 hover:[animation-play-state:paused]">
           {[...tools, ...tools].map((tool, i) => (
             <div
-              key={`${tool.icon}-${i}`}
+              key={`${tool.name}-${i}`}
               className="flex items-center gap-2 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://icons.lobehub.com/icons/${tool.icon}.svg`}
-                alt={tool.name}
-                width={24}
-                height={24}
-                loading="lazy"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none"
-                }}
-              />
+              <tool.Icon size={24} />
               <span className="whitespace-nowrap text-[10px] text-muted-foreground">
                 {tool.name}
               </span>
