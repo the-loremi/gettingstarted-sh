@@ -1,0 +1,27 @@
+name: Stable Diffusion
+slug: stable-diffusion
+category: video-gen
+version: latest
+homepage: https://github.com/AUTOMATIC1111/stable-diffusion-webui
+description: AI image generation with AUTOMATIC1111 web UI
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && cd stable-diffusion-webui && ./webui.sh
+  linux: |
+    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && cd stable-diffusion-webui && ./webui.sh
+  win: |
+    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git; cd stable-diffusion-webui; .\webui-user.bat
+verified: false

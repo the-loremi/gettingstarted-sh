@@ -1,0 +1,27 @@
+name: ComfyUI
+slug: comfyui
+category: video-gen
+version: latest
+homepage: https://github.com/comfyanonymous/ComfyUI
+description: Node-based UI for Stable Diffusion and AI image generation workflows
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: comfyui
+  cargo: null
+  mac: |
+    git clone https://github.com/comfyanonymous/ComfyUI.git && cd ComfyUI && pip install -r requirements.txt && python main.py
+  linux: |
+    git clone https://github.com/comfyanonymous/ComfyUI.git && cd ComfyUI && pip install -r requirements.txt && python main.py
+  win: |
+    git clone https://github.com/comfyanonymous/ComfyUI.git; cd ComfyUI; pip install -r requirements.txt; python main.py
+verified: false

@@ -1,0 +1,27 @@
+name: GPT4All
+slug: gpt4all
+category: local-llm
+version: latest
+homepage: https://gpt4all.io
+description: Run large language models locally and privately on your computer
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: gpt4all --cask
+  winget: Nomic.GPT4All
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: gpt4all
+  cargo: null
+  mac: |
+    pip install gpt4all
+  linux: |
+    pip install gpt4all
+  win: |
+    pip install gpt4all
+verified: false

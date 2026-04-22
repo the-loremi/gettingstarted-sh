@@ -1,0 +1,27 @@
+name: Vercel AI SDK
+slug: vercel-ai-sdk
+category: sdks
+version: latest
+homepage: https://sdk.vercel.ai
+description: Build AI-powered apps with React, Next.js, and any LLM provider
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: ai
+  pip: null
+  cargo: null
+  mac: |
+    npm install ai @ai-sdk/openai
+  linux: |
+    npm install ai @ai-sdk/openai
+  win: |
+    npm install ai @ai-sdk/openai
+verified: false

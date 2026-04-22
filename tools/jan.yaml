@@ -1,0 +1,27 @@
+name: Jan
+slug: jan
+category: local-llm
+version: latest
+homepage: https://jan.ai
+description: Open-source ChatGPT alternative that runs locally on your computer
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: jan --cask
+  winget: Jan.Jan
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    curl -fsSL https://jan.ai/install/mac.sh | sh
+  linux: |
+    curl -fsSL https://jan.ai/install/linux.sh | sh
+  win: |
+    powershell -c "irm https://jan.ai/install/win.ps1 | iex"
+verified: false

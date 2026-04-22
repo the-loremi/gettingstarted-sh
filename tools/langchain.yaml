@@ -1,0 +1,27 @@
+name: LangChain
+slug: langchain
+category: sdks
+version: latest
+homepage: https://langchain.com
+description: Framework for building applications powered by language models
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: langchain
+  pip: langchain
+  cargo: null
+  mac: |
+    pip install langchain
+  linux: |
+    pip install langchain
+  win: |
+    pip install langchain
+verified: false

@@ -1,0 +1,27 @@
+name: Pika
+slug: pika
+category: video-gen
+version: latest
+homepage: https://pika.art
+description: AI video generation platform — create and edit videos from text
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    echo "Pika is a web-based tool. Visit https://pika.art to get started."
+  linux: |
+    echo "Pika is a web-based tool. Visit https://pika.art to get started."
+  win: |
+    Write-Host "Pika is a web-based tool. Visit https://pika.art to get started."
+verified: false

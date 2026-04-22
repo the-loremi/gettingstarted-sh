@@ -1,0 +1,27 @@
+name: Replicate
+slug: replicate
+category: sdks
+version: latest
+homepage: https://replicate.com
+description: Run and deploy machine learning models with an API
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: replicate
+  pip: replicate
+  cargo: null
+  mac: |
+    pip install replicate
+  linux: |
+    pip install replicate
+  win: |
+    pip install replicate
+verified: false

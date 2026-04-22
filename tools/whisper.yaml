@@ -1,0 +1,27 @@
+name: Whisper
+slug: whisper
+category: audio-ai
+version: latest
+homepage: https://github.com/openai/whisper
+description: OpenAI's speech recognition model — transcribe audio to text
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: openai-whisper
+  cargo: null
+  mac: |
+    pip install openai-whisper
+  linux: |
+    pip install openai-whisper
+  win: |
+    pip install openai-whisper
+verified: false

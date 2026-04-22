@@ -1,0 +1,27 @@
+name: Midjourney
+slug: midjourney
+category: video-gen
+version: latest
+homepage: https://midjourney.com
+description: AI image generation via Discord — create art from text prompts
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    echo "Midjourney is a web/Discord-based tool. Visit https://midjourney.com to get started."
+  linux: |
+    echo "Midjourney is a web/Discord-based tool. Visit https://midjourney.com to get started."
+  win: |
+    Write-Host "Midjourney is a web/Discord-based tool. Visit https://midjourney.com to get started."
+verified: false

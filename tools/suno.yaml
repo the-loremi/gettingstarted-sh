@@ -1,0 +1,27 @@
+name: Suno
+slug: suno
+category: audio-ai
+version: latest
+homepage: https://suno.com
+description: AI music generation platform — create songs from text prompts
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    echo "Suno is a web-based tool. Visit https://suno.com to get started."
+  linux: |
+    echo "Suno is a web-based tool. Visit https://suno.com to get started."
+  win: |
+    Write-Host "Suno is a web-based tool. Visit https://suno.com to get started."
+verified: false

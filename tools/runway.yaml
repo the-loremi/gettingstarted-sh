@@ -1,0 +1,27 @@
+name: Runway
+slug: runway
+category: video-gen
+version: latest
+homepage: https://runwayml.com
+description: AI-powered creative tools for video generation and editing
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: runwayml
+  cargo: null
+  mac: |
+    pip install runwayml
+  linux: |
+    pip install runwayml
+  win: |
+    pip install runwayml
+verified: false
