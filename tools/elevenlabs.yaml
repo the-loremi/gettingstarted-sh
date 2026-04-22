@@ -1,0 +1,27 @@
+name: ElevenLabs
+slug: elevenlabs
+category: audio-ai
+version: v3 API
+homepage: https://elevenlabs.io
+description: AI voice generation and text-to-speech platform
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: elevenlabs
+  pip: elevenlabs
+  cargo: null
+  mac: |
+    pip install elevenlabs
+  linux: |
+    pip install elevenlabs
+  win: |
+    pip install elevenlabs
+verified: true

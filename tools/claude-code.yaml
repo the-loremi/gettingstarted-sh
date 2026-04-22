@@ -1,0 +1,24 @@
+name: Claude Code
+slug: claude-code
+category: ai-coding
+version: latest
+homepage: https://docs.anthropic.com/en/docs/claude-code
+description: Anthropic's official CLI for Claude, the AI assistant
+os:
+  - mac
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: "@anthropic-ai/claude-code"
+  pip: null
+  cargo: null
+  mac: |
+    curl -fsSL https://gettingstarted.sh/scripts/claude-code/mac.sh | sh
+  linux: |
+    curl -fsSL https://gettingstarted.sh/scripts/claude-code/linux.sh | sh
+verified: true

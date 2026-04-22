@@ -1,0 +1,27 @@
+name: Ollama
+slug: ollama
+category: local-llm
+version: "0.6.x"
+homepage: https://ollama.com
+description: Run large language models locally on your machine
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: ollama
+  winget: Ollama.Ollama
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: ollama
+  cargo: null
+  mac: |
+    curl -fsSL https://ollama.com/install.sh | sh
+  linux: |
+    curl -fsSL https://ollama.com/install.sh | sh
+  win: |
+    powershell -c "irm https://ollama.com/download/OllamaSetup.exe -OutFile OllamaSetup.exe; Start-Process OllamaSetup.exe"
+verified: true

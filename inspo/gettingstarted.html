@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gettingstarted.sh — The AI Tool Setup Registry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #1e1e1e;
+    --border-bright: #2e2e2e;
+    --text: #e8e8e0;
+    --muted: #6a6a60;
+    --accent: #b8ff57;
+    --accent2: #57c8ff;
+    --accent3: #ff6b35;
+    --mono: 'Martian Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* GRID OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(184,255,87,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,255,87,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 56px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--muted); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 8px 16px;
+    background: var(--accent);
+    color: #0a0a0a;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 32px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(56px, 9vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    max-width: 900px;
+  }
+
+  .hero-title .line2 {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .hero-title .accent-word {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+    font-weight: 300;
+  }
+
+  /* TERMINAL */
+  .terminal-block {
+    display: inline-flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #161616;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .terminal-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+    letter-spacing: 0.06em;
+  }
+
+  .terminal-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .terminal-line {
+    font-family: var(--mono);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .prompt { color: var(--accent); }
+  .cmd { color: var(--text); }
+  .arg { color: var(--accent2); }
+  .comment { color: var(--muted); font-style: italic; }
+
+  .cursor {
+    display: inline-block;
+    width: 7px;
+    height: 14px;
+    background: var(--accent);
+    animation: blink 1.1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* STATS STRIP */
+  .stats-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 100px 0 0;
+    padding: 0 32px;
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    divide: auto;
+  }
+
+  .stat-item {
+    padding: 40px 0;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+  .stat-item:not(:first-child) { padding-left: 40px; }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .stat-num .accent { color: var(--accent); }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* SECTION */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 32px;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-tag::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--border-bright);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  /* HOW IT WORKS */
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 64px;
+    border: 1px solid var(--border);
+  }
+
+  .how-card {
+    padding: 48px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .how-card:hover { background: rgba(184,255,87,0.02); }
+
+  .how-card:nth-child(2n) { border-right: none; }
+  .how-card:nth-child(3), .how-card:nth-child(4) { border-bottom: none; }
+
+  .card-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    letter-spacing: 0.06em;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .card-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .card-code {
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent2);
+    border-radius: 3px;
+  }
+
+  /* TOOLS MARQUEE */
+  .tools-section {
+    padding: 60px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tools-label {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 28s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-track:hover { animation-play-state: paused; }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .tool-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: 1px solid var(--border-bright);
+    margin-right: 12px;
+    border-radius: 2px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .tool-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .tool-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border-bright);
+  }
+
+  /* REGISTRY */
+  .registry-section { background: var(--surface); }
+
+  .registry-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 48px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  .registry-table th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-bright);
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+
+  .registry-table td {
+    padding: 16px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .registry-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .tool-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tool-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+
+  .tool-name { color: var(--text); }
+  .tool-category {
+    display: inline-block;
+    padding: 3px 8px;
+    border: 1px solid var(--border-bright);
+    border-radius: 2px;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .category-ai { border-color: rgba(184,255,87,0.3); color: var(--accent); }
+  .category-code { border-color: rgba(87,200,255,0.3); color: var(--accent2); }
+  .category-media { border-color: rgba(255,107,53,0.3); color: var(--accent3); }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 2px;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* OPEN SOURCE */
+  .oss-section {
+    background: linear-gradient(135deg, #0d1a06 0%, #060d12 50%, #0a0a0a 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .oss-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .oss-content .section-title { max-width: 460px; }
+
+  .oss-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-top: 20px;
+  }
+
+  .oss-body strong { color: var(--text); font-weight: 400; }
+
+  .oss-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--accent);
+    color: #0a0a0a;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border-bright);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+  .oss-visual {
+    position: relative;
+  }
+
+  .contribution-card {
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .contrib-header {
+    padding: 16px 20px;
+    background: #161616;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .contrib-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .contrib-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 8px;
+    background: rgba(184,255,87,0.1);
+    border: 1px solid rgba(184,255,87,0.2);
+    color: var(--accent);
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+  }
+
+  .contrib-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contrib-line {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    display: flex;
+    gap: 10px;
+  }
+
+  .contrib-line .plus { color: var(--accent); }
+  .contrib-line .minus { color: #ff5f57; }
+  .contrib-line .neutral { color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 32px 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .footer-brand .nav-logo { font-size: 15px; }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+    max-width: 260px;
+    line-height: 1.6;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 60px;
+  }
+
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--text); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .loremi-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .loremi-badge span { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease forwards; }
+  .hero-title { animation: fadeUp 0.6s 0.1s ease forwards; opacity: 0; }
+  .hero-sub { animation: fadeUp 0.6s 0.2s ease forwards; opacity: 0; }
+  .terminal-block { animation: fadeUp 0.6s 0.3s ease forwards; opacity: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(3) { padding-left: 0; border-right: 1px solid var(--border); }
+    .how-grid { grid-template-columns: 1fr; }
+    .how-card { border-right: none !important; }
+    .how-card:nth-child(3) { border-bottom: 1px solid var(--border) !important; }
+    .oss-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-inner { flex-direction: column; }
+    .footer-links { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">getting<span>started</span>.sh</div>
+  <ul class="nav-links">
+    <li><a href="#registry">Registry</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#contribute">Contribute</a></li>
+    <li><a href="#docs">Docs</a></li>
+  </ul>
+  <button class="nav-cta">Star on GitHub</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Open Registry · AI Tooling Era</div>
+  <h1 class="hero-title">
+    Every tool.<br>
+    <span class="line2">One <span class="accent-word">command.</span></span>
+  </h1>
+  <p class="hero-sub">
+    The canonical getting-started registry for AI tools, models, and vibe-coding stacks.
+    One-line setup commands. Always current. Community maintained.
+  </p>
+
+  <div class="terminal-block">
+    <div class="terminal-bar">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="terminal-label">bash</span>
+    </div>
+    <div class="terminal-body">
+      <div class="terminal-line">
+        <span class="prompt">$</span>
+        <span class="cmd">curl</span>
+        <span class="arg">gettingstarted.sh/cursor</span>
+        <span class="cmd">| sh</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">$</span>
+        <span class="cmd">curl</span>
+        <span class="arg">gettingstarted.sh/claude-code</span>
+        <span class="cmd">| sh</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">$</span>
+        <span class="cmd">curl</span>
+        <span class="arg">gettingstarted.sh/lovable</span>
+        <span class="cmd">| sh</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">$</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">240<span class="accent">+</span></div>
+      <div class="stat-label">Tools indexed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">18<span class="accent">k</span></div>
+      <div class="stat-label">GitHub stars</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3.2<span class="accent">m</span></div>
+      <div class="stat-label">Commands run</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">840<span class="accent">+</span></div>
+      <div class="stat-label">Contributors</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS MARQUEE -->
+<div class="tools-section">
+  <div class="tools-label">Works with every AI tool in your stack</div>
+  <div class="marquee-track" id="marquee">
+    <div class="tool-pill"><div class="tool-dot"></div>Cursor</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Claude Code</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Lovable</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Windsurf</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Runway ML</div>
+    <div class="tool-pill"><div class="tool-dot"></div>ElevenLabs</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Replicate</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Ollama</div>
+    <div class="tool-pill"><div class="tool-dot"></div>LM Studio</div>
+    <div class="tool-pill"><div class="tool-dot"></div>ComfyUI</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Suno</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Pika</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Vercel AI SDK</div>
+    <div class="tool-pill"><div class="tool-dot"></div>LangChain</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Continue.dev</div>
+    <!-- duplicate for seamless loop -->
+    <div class="tool-pill"><div class="tool-dot"></div>Cursor</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Claude Code</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Lovable</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Windsurf</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Runway ML</div>
+    <div class="tool-pill"><div class="tool-dot"></div>ElevenLabs</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Replicate</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Ollama</div>
+    <div class="tool-pill"><div class="tool-dot"></div>LM Studio</div>
+    <div class="tool-pill"><div class="tool-dot"></div>ComfyUI</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Suno</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Pika</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Vercel AI SDK</div>
+    <div class="tool-pill"><div class="tool-dot"></div>LangChain</div>
+    <div class="tool-pill"><div class="tool-dot"></div>Continue.dev</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title">Setup in seconds.<br><em>Not sessions.</em></h2>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="card-num">01 —</div>
+        <h3 class="card-title">Find your tool</h3>
+        <p class="card-body">Browse the registry by category — AI coding, video generation, audio, models, SDKs. Every tool is indexed with version, OS support, and prerequisites.</p>
+        <div class="card-code">gettingstarted.sh/browse/ai-coding</div>
+      </div>
+      <div class="how-card">
+        <div class="card-num">02 —</div>
+        <h3 class="card-title">Run one command</h3>
+        <p class="card-body">Copy a single curl command. The setup script handles dependencies, environment variables, and initial configuration — verified by the community.</p>
+        <div class="card-code">curl gettingstarted.sh/[tool] | sh</div>
+      </div>
+      <div class="how-card">
+        <div class="card-num">03 —</div>
+        <h3 class="card-title">Docs that stay current</h3>
+        <p class="card-body">Each tool page links to the canonical setup guide with copy-paste commands, common errors, and version-pinned instructions maintained by contributors who use it daily.</p>
+        <div class="card-code">gettingstarted.sh/cursor/docs</div>
+      </div>
+      <div class="how-card">
+        <div class="card-num">04 —</div>
+        <h3 class="card-title">Contribute a tool</h3>
+        <p class="card-body">Missing a tool? Submit a PR. The schema is simple: a manifest file + setup script + docs page. Verified tools get indexed within 48 hours.</p>
+        <div class="card-code">gs add --tool=[name] --category=[tag]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRY PREVIEW -->
+<section id="registry" class="registry-section">
+  <div class="section-inner">
+    <div class="section-tag">Registry</div>
+    <h2 class="section-title">The setup registry<br><em>for the AI era.</em></h2>
+
+    <table class="registry-table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Category</th>
+          <th>Version</th>
+          <th>OS</th>
+          <th>Command</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="tool-name-cell">
+              <div class="tool-icon">⌘</div>
+              <span class="tool-name">Cursor</span>
+            </div>
+          </td>
+          <td><span class="tool-category category-code">AI Coding</span></td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">0.42.x</td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">mac · win · linux</td>
+          <td><button class="copy-btn" onclick="copyCmd(this,'curl gettingstarted.sh/cursor | sh')">⊕ copy</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tool-name-cell">
+              <div class="tool-icon">◆</div>
+              <span class="tool-name">Claude Code</span>
+            </div>
+          </td>
+          <td><span class="tool-category category-ai">AI Model</span></td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">latest</td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">mac · linux</td>
+          <td><button class="copy-btn" onclick="copyCmd(this,'curl gettingstarted.sh/claude-code | sh')">⊕ copy</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tool-name-cell">
+              <div class="tool-icon">🎬</div>
+              <span class="tool-name">Runway ML</span>
+            </div>
+          </td>
+          <td><span class="tool-category category-media">Video Gen</span></td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">Gen-3</td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">mac · win</td>
+          <td><button class="copy-btn" onclick="copyCmd(this,'curl gettingstarted.sh/runway | sh')">⊕ copy</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tool-name-cell">
+              <div class="tool-icon">◎</div>
+              <span class="tool-name">Ollama</span>
+            </div>
+          </td>
+          <td><span class="tool-category category-ai">Local LLM</span></td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">0.6.x</td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">mac · win · linux</td>
+          <td><button class="copy-btn" onclick="copyCmd(this,'curl gettingstarted.sh/ollama | sh')">⊕ copy</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tool-name-cell">
+              <div class="tool-icon">♪</div>
+              <span class="tool-name">ElevenLabs</span>
+            </div>
+          </td>
+          <td><span class="tool-category category-media">Audio AI</span></td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">v3 API</td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--muted)">all</td>
+          <td><button class="copy-btn" onclick="copyCmd(this,'curl gettingstarted.sh/elevenlabs | sh')">⊕ copy</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- OPEN SOURCE -->
+<section class="oss-section" id="contribute">
+  <div class="oss-inner">
+    <div class="oss-content">
+      <div class="section-tag">Open Source</div>
+      <h2 class="section-title">Built in public.<br><em>Owned by all.</em></h2>
+      <p class="oss-body">
+        gettingstarted.sh is <strong>MIT licensed</strong> and community-driven.
+        The registry, CLI, and docs engine are fully open. Anyone can add a tool,
+        fix a script, or improve docs. <strong>The more contributors, the more valuable the registry becomes</strong> — for everyone.
+      </p>
+      <p class="oss-body" style="margin-top:12px;">
+        A project of <strong>The Loremi Ltd</strong> — built to be the infrastructure
+        layer for how developers onboard AI tools.
+      </p>
+      <div class="oss-actions">
+        <a href="#" class="btn-primary">⊕ Star on GitHub</a>
+        <a href="#" class="btn-ghost">View Registry →</a>
+      </div>
+    </div>
+    <div class="oss-visual">
+      <div class="contribution-card">
+        <div class="contrib-header">
+          <span class="contrib-title">tools/lovable/setup.sh</span>
+          <span class="contrib-badge">PR merged</span>
+        </div>
+        <div class="contrib-body">
+          <div class="contrib-line"><span class="neutral">#</span><span style="color:var(--muted)"> gettingstarted.sh manifest v1</span></div>
+          <div class="contrib-line"><span class="neutral">name:</span><span style="color:var(--accent2)"> "lovable"</span></div>
+          <div class="contrib-line"><span class="neutral">category:</span><span style="color:var(--accent2)"> "vibe-coding"</span></div>
+          <div class="contrib-line"><span class="neutral">version:</span><span style="color:var(--accent2)"> "2.1.0"</span></div>
+          <div class="contrib-line"><span class="plus">+</span><span style="color:var(--accent)"> os: [mac, win, linux]</span></div>
+          <div class="contrib-line"><span class="plus">+</span><span style="color:var(--accent)"> requires: [node >= 18, git]</span></div>
+          <div class="contrib-line"><span class="plus">+</span><span style="color:var(--accent)"> verified: true</span></div>
+          <div class="contrib-line"><span class="minus">-</span><span style="color:#ff5f57"> verified: false</span></div>
+          <div class="contrib-line"><span class="neutral">maintainer:</span><span style="color:var(--accent2)"> "@contributor"</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">getting<span>started</span>.sh</div>
+      <p class="footer-tagline">The canonical setup registry for the AI tooling era.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Registry</h4>
+        <a href="#">Browse Tools</a>
+        <a href="#">AI Coding</a>
+        <a href="#">Video Gen</a>
+        <a href="#">Local Models</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <a href="#">GitHub</a>
+        <a href="#">Contribute</a>
+        <a href="#">Roadmap</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">The Loremi</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 gettingstarted.sh · MIT Licensed</p>
+    <p class="loremi-badge">A <span>The Loremi Ltd</span> project</p>
+  </div>
+</footer>
+
+<script>
+  function copyCmd(btn, cmd) {
+    navigator.clipboard.writeText(cmd).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓ copied';
+      btn.style.borderColor = 'var(--accent)';
+      btn.style.color = 'var(--accent)';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }, 1800);
+    });
+  }
+</script>
+
+</body>
+</html>

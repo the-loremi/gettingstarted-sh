@@ -1,0 +1,27 @@
+name: Lovable
+slug: lovable
+category: vibe-coding
+version: latest
+homepage: https://lovable.dev
+description: AI-powered full-stack app builder
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: lovable
+  pip: null
+  cargo: null
+  mac: |
+    npm install -g lovable
+  linux: |
+    npm install -g lovable
+  win: |
+    npm install -g lovable
+verified: false

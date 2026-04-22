@@ -1,0 +1,27 @@
+name: Cursor
+slug: cursor
+category: ai-coding
+version: "0.42.x"
+homepage: https://cursor.com
+description: AI-first code editor built on VS Code
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: cursor --cask
+  winget: Cursor.Cursor
+  choco: cursor
+  scoop: extras/cursor
+  snap: cursor
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    curl -fsSL https://download.cursor.com/mac/install.sh | sh
+  linux: |
+    curl -fsSL https://download.cursor.com/linux/install.sh | sh
+  win: |
+    powershell -c "irm https://download.cursor.com/win/install.ps1 | iex"
+verified: true
