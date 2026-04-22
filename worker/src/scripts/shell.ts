@@ -25,6 +25,17 @@ export function generateShellScript(tool: Tool): string {
   const linuxFallback = tool.install.linux?.trim() ?? ""
 
   lines.push("")
+  lines.push("# Banner")
+  lines.push('cat << \'BANNER\'')
+  lines.push("")
+  lines.push(" ██████  ███████    ███████ ██   ██")
+  lines.push("██       ██         ██      ██   ██")
+  lines.push("██   ███ ███████    ███████ ████████")
+  lines.push("██    ██      ██         ██ ██   ██")
+  lines.push(" ██████  ███████ ██ ███████ ██   ██")
+  lines.push("")
+  lines.push("BANNER")
+  lines.push("")
   lines.push("# Detection helper")
   lines.push('command_exists() { command -v "$1" >/dev/null 2>&1; }')
   lines.push("")

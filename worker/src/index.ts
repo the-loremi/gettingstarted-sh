@@ -38,6 +38,13 @@ export default {
     // CLI request to root: show usage
     if (!slug) {
       return textResponse(
+        "\n" +
+        " ██████  ███████    ███████ ██   ██\n" +
+        "██       ██         ██      ██   ██\n" +
+        "██   ███ ███████    ███████ ████████\n" +
+        "██    ██      ██         ██ ██   ██\n" +
+        " ██████  ███████ ██ ███████ ██   ██\n" +
+        "\n" +
         "gettingstarted.sh — Every tool. One command.\n\n" +
         "Usage:\n" +
         "  curl gettingstarted.sh/[tool] | sh          (macOS/Linux)\n" +

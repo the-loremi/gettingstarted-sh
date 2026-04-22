@@ -1,4 +1,4 @@
-import { Geist, JetBrains_Mono } from "next/font/google"
+import { Geist, JetBrains_Mono, Fira_Mono } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -14,6 +14,12 @@ const fontSans = Geist({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+})
+
+const firaMono = Fira_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-fira-mono",
 })
 
 export const metadata = {
@@ -36,6 +42,7 @@ export default function RootLayout({
         fontSans.variable,
         "font-mono",
         jetbrainsMono.variable,
+        firaMono.variable,
       )}
     >
       <body>

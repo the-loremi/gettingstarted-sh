@@ -1,12 +1,14 @@
 import Link from "next/link"
 import { InstallWidget } from "./install-widget"
 import { LogoMarquee } from "./logo-marquee"
+import { AsciiLogo } from "./ascii-logo"
 
 export function Hero() {
   return (
     <section className="flex min-h-[calc(100vh-3.5rem)] flex-col justify-center px-6 pt-14">
       <div className="mx-auto w-full max-w-2xl">
-        <p className="mb-4 text-xs uppercase tracking-widest text-muted-foreground">
+        <AsciiLogo />
+        <p className="mt-6 mb-4 text-xs uppercase tracking-widest text-muted-foreground">
           Open Source Registry
         </p>
         <h1 className="text-3xl font-medium leading-tight md:text-5xl">
