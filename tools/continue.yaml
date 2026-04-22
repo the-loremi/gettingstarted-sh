@@ -1,0 +1,27 @@
+name: Continue.dev
+slug: continue
+category: ai-coding
+version: latest
+homepage: https://continue.dev
+description: Open-source AI code assistant for VS Code and JetBrains
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: null
+  winget: null
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    code --install-extension Continue.continue
+  linux: |
+    code --install-extension Continue.continue
+  win: |
+    code --install-extension Continue.continue
+verified: false

@@ -1,0 +1,27 @@
+name: LM Studio
+slug: lm-studio
+category: local-llm
+version: latest
+homepage: https://lmstudio.ai
+description: Discover, download, and run local LLMs with a desktop app
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: lm-studio --cask
+  winget: ElementLabs.LMStudio
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    curl -fsSL https://lmstudio.ai/download/mac | sh
+  linux: |
+    curl -fsSL https://lmstudio.ai/download/linux | sh
+  win: |
+    powershell -c "irm https://lmstudio.ai/download/win -OutFile LMStudioSetup.exe; Start-Process LMStudioSetup.exe"
+verified: false

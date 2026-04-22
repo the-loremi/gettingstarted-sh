@@ -1,0 +1,27 @@
+name: Windsurf
+slug: windsurf
+category: ai-coding
+version: latest
+homepage: https://codeium.com/windsurf
+description: AI-powered code editor by Codeium
+os:
+  - mac
+  - win
+  - linux
+install:
+  brew: windsurf --cask
+  winget: Codeium.Windsurf
+  choco: null
+  scoop: null
+  snap: null
+  apt: null
+  npm: null
+  pip: null
+  cargo: null
+  mac: |
+    curl -fsSL https://windsurf-stable.codeiumdata.com/mac/install.sh | sh
+  linux: |
+    curl -fsSL https://windsurf-stable.codeiumdata.com/linux/install.sh | sh
+  win: |
+    powershell -c "irm https://windsurf-stable.codeiumdata.com/win/install.ps1 | iex"
+verified: false
