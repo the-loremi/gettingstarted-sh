@@ -2,8 +2,9 @@ name = "gettingstarted-install"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
-[build]
-command = "npx tsx build-tools.ts"
+# Build tools.json before deploying: npx tsx build-tools.ts
+# [build]
+# command = "npx tsx build-tools.ts"
 
 # Route configuration (set up after domain is connected)
 # routes = [
