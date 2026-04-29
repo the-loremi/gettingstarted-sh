@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn@latest add select)",
+      "Bash(npx shadcn@latest add select -y)",
+      "Bash(pnpm remove:*)",
+      "Bash(node -e \"const r = require\\(''''radix-ui''''\\); console.log\\(Object.keys\\(r\\).filter\\(k => k.includes\\(''''Select''''\\)\\).join\\('''', ''''\\)\\)\")",
+      "Bash(node -e \"try { require.resolve\\(''@radix-ui/react-dismissable-layer''\\); console.log\\(''found''\\) } catch\\(e\\) { console.log\\(''not found''\\) }\")",
+      "Bash(node -e \"const j=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\);const p=JSON.parse\\(j\\);console.log\\(Object.keys\\(p.dependencies||{}\\).join\\(''''\\\\n''''\\)\\)\")",
+      "Bash(node -e \"const p=require\\(''./node_modules/@radix-ui/react-select/package.json''\\);console.log\\(Object.keys\\(p.dependencies||{}\\).join\\(''\\\\n''\\)\\)\")",
+      "WebFetch(domain:lobehub.com)",
+      "WebFetch(domain:icons.lobehub.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm view:*)",
+      "Bash(node -e \"const p=require\\(''''@lobehub/icons''''\\); const names = Object.keys\\(p\\).filter\\(k => !k.startsWith\\(''''_''''\\)\\).slice\\(0,50\\); console.log\\(names.join\\(''''\\\\n''''\\)\\)\")",
+      "Bash(node -e \"const p=require\\(''''@lobehub/icons''''\\); console.log\\(Object.keys\\(p\\).filter\\(k => !k.startsWith\\(''''_''''\\)\\).slice\\(0,60\\).join\\(''''\\\\n''''\\)\\)\")",
+      "Bash(node -e \":*)",
+      "Bash(pnpm exec:*)",
+      "Bash(./node_modules/.bin/wrangler deploy:*)",
+      "Bash(pnpm run:*)",
+      "Bash(npx --package=wrangler wrangler deploy)",
+      "Bash(npx --package=wrangler wrangler deploy --no-build)",
+      "Bash(npx --package=wrangler wrangler deploy --no-bundle)"
+    ]
+  }
+}
